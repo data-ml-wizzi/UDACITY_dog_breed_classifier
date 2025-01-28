@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 import os
 from werkzeug.utils import secure_filename
+from models import classify_dog_breed
 
 # Initialisiere Flask-App
 app = Flask(__name__)
