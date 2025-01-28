@@ -57,6 +57,17 @@ The Data for the dogs contains a training, validation and testing set. In total 
   <li>testing:      836 images  
 </ul>
 
+The datasets contain a total of 133 breeds of dogs. The images are not spread evenly over these breeds. Therefore probably some breeds can be classified with higher accuracy, precision and f1-score than others.
+
+<br>
+    <div align="center">
+	    <img src="https://github.com/data-ml-wizzi/UDACITY_dog_breed_classifier/blob/main/images/breed_distribution.png">
+    </div>
+    <div align="center">
+	    <i>Figure 3 – Distribution of the images in the dataset over the breeds</i>
+    </div>
+<br>
+
 # File Descriptions <a name="files"></a>
 
 ```
