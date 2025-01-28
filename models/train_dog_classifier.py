@@ -32,25 +32,6 @@ from sklearn.metrics import classification_report
 
 
 
-
-
-
-
-
-# OLD STUFF
-
-#from sklearn.metrics import classification_report
-from sklearn.model_selection import GridSearchCV, train_test_split
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.multioutput import MultiOutputClassifier
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
-
-
-import pickle
-
-
-
 # Define a context manager to suppress stdout and stderr for a cleaner output
 @contextlib.contextmanager
 def suppress_stdout_stderr():
@@ -72,163 +53,34 @@ def suppress_stdout_stderr():
             sys.stdout = old_stdout
             sys.stderr = old_stderr
 
-def load_dataset(path):
+def get_dog_names(data_path):
     """
-    Function to load datasets from a path and return a list of files and targets.
-    
-    Parameter:
-        path:           text string of the path from the dataset to load
-    
-    Return:
-        dog_files:      the files paths of the files in the dataset
-        dog_targets:    the breeds of the respectives files
+    Loads the dog breed names from the specified training data directory.
+
+    Args:
+        data_path (str): Path to the training dataset directory (e.g., 'dogImages/train').
+
+    Returns:
+        list: A list of dog breed names extracted from the directory structure.
     """
-    data = load_files(path)
-    dog_files = np.array(data['filenames'])
-    dog_targets = to_categorical(np.array(data['target']), 133)
+    dog_names = [item[20:-1] for item in sorted(glob(f"{data_path}/*/"))]
     
-    return dog_files, dog_targets
+    return dog_names
 
-
-def load_dog_data():
+def get_targets(data_path):
     """
-    Function to load files and targets for train, validation and test sets,
-    as well as all the dog names. At the end print statistics.
-    
-    Parameter:
-        None
-    
-    Return:
-        train_files: the files paths to the train data
-        train_targets: the breed of the train file
-        valid_files: the file paths to the validation data
-        valid_targets: the breed of the validation files
-        test_files: the files paths to the testing data
-        test_targets: the breed of the testing files
+    Loads the dog breed targets from the specified data directory.
+
+    Args:
+        data_path (str): Path to the dataset directory (e.g., 'dogImages/train').
+
+    Returns:
+        list: A list of dog breed targets for the data.
     """
+    data = load_files(data_path)
+    targets = to_categorical(np.array(data['target']), 133)
     
-    # load train, test, and validation datasets
-    train_files, train_targets = load_dataset('dogImages/train')
-    valid_files, valid_targets = load_dataset('dogImages/valid')
-    test_files, test_targets = load_dataset('dogImages/test')
-
-    # load list of dog names
-    dog_names = [item[20:-1] for item in sorted(glob("dogImages/train/*/"))]
-
-    # print statistics about the dataset
-    #print('-------- DOG DATA STATISTICS ----------')
-    print('>> There are %d total dog categories.' % len(dog_names))
-    print('>> There are %s total dog images.\n' % len(np.hstack([train_files, valid_files, test_files])))
-    print('>> There are %d training dog images.' % len(train_files))
-    print('>> There are %d validation dog images.' % len(valid_files))
-    print('>> There are %d test dog images.'% len(test_files))
-    
-
-    return train_files, train_targets,\
-           valid_files, valid_targets,\
-           test_files, test_targets,\
-           dog_names
-
-
-def load_human_data():
-    """
-    Function to load the human files
-    
-    Parameter:
-        None
-    
-    Return:
-        human_files: file paths to the pictures of humans
-    """
-
-    random.seed(8675309)
-
-    # load filenames in shuffled human dataset
-    human_files = np.array(glob("lfw/*/*"))
-    random.shuffle(human_files)
-
-    # print statistics about the dataset
-    print('>> There are %d total human images.' % len(human_files))
-
-    return human_files
-
-def face_detector(img_path):
-    """
-    Function to determine of the image of a retrieved file path contains a human face
-    
-    Parameter:
-        img_path: text string of the file path to the image
-    
-    Return:
-        True:  if a face is detected
-        False: if no face is detected
-    """
-    #retrieve the pre-trained face detector
-    face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_alt.xml')
-    # load color (BGR) image
-    img = cv2.imread(img_path)
-    # convert BGR image to grayscale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # find faces in image
-    faces = face_cascade.detectMultiScale(gray)
-
-    return len(faces) > 0               
-
-def path_to_tensor(img_path):
-    """
-    Function to load the image from img_path and turn it into a 4D tensor.
-    
-    Parameter:
-        img_path: text string of the file path to the image
-    
-    Return:
-        4D Tensor of the image from img_path
-    """
-    # loads RGB image as PIL.Image.Image type
-    img = image.load_img(img_path, target_size=(224, 224))
-    # convert PIL.Image.Image type to 3D tensor with shape (224, 224, 3)
-    x = image.img_to_array(img)
-    # convert 3D tensor to 4D tensor with shape (1, 224, 224, 3) and return 4D tensor
-    return np.expand_dims(x, axis=0)
-
-def paths_to_tensor(img_paths):
-    """
-    Function to load multiple images, turn them into a 4D Tensor and return a list of 4D Tensors.
-    
-    Parameter:
-        img_paths: text strings of the file paths to the images
-    
-    Return:
-        a numpy array of 4D Tensors from all images from img_paths
-    """
-    list_of_tensors = [path_to_tensor(img_path) for img_path in tqdm(img_paths)]
-    
-    return np.vstack(list_of_tensors)
-
-
-
-def dog_detector(img_path):
-    """
-    Function to to detect dogs in a picture
-    
-    Parameter:
-        img_path: text string to the relevant picture to be checked
-    
-    Return:
-        prediction: True (a dog) / False (no dog)
-    """
-    # define ResNet50 model
-    ResNet50_model_dog_class = RN50(weights='imagenet')
-    
-    # load image, transform to a tensor and preprocess it for ResNet50
-    img = rn_ppi(path_to_tensor(img_path))
-    
-    # make a prediction
-    with suppress_stdout_stderr():
-        prediction = np.argmax(ResNet50_model_dog_class.predict(img))
-    
-    return ((prediction <= 268) & (prediction >= 151)) 
-
+    return targets
 
 def extract_Xception(tensor):
 	"""
@@ -299,20 +151,6 @@ def evaluate_model(model, X_test, Y_test, names):
     
     return
 
-def save_model(model, model_filepath):
-    """
-    Save the model into a PICKLE-File
-    
-    Parameter:
-        model: Model to save
-        model_filepath: Path 
-    
-    Return:
-        NONE
-    """     
-    #pickle.dump(model, open(model_filepath, 'wb') )
-   
-    return
 
 
 def main():
@@ -323,31 +161,11 @@ def main():
                
         # load train, test, and validation datasets
         print('-------------------------------------------------')
-        print('Loading dog data into train, test & validation sets...')
-        train_files, train_targets,\
-        valid_files, valid_targets,\
-        test_files, test_targets,\
-        dog_names = load_dog_data()
-
-        print('-------------------------------------------------')
-        print('Loading file paths to the pictures of humans...')
-        human_files = load_human_data()
-
-        print('-------------------------------------------------')
-        print('Creating test subsets...')
-        human_files_short = human_files[:100]
-        dog_files_short = train_files[:100]
-
-        print('Testing "Dog Detecter" and "Face Detector"...')
-        for dog in dog_files_short:
-            dog_detector(dog)
-            print('"Dog Detecter" works...')
-            break
-
-        for human in human_files_short:
-            face_detector(human)
-            print('"Face Detecter" works...')
-            break
+        print('Loading dog names...')
+        dog_names = get_dog_names('dogImages/train')
+        train_targets = get_targets('dogImages/train')
+        valid_targets = get_targets('dogImages/valid')
+        test_targets = get_targets('dogImages/test')
 
         print('-------------------------------------------------')
         print('Loading bottleneck features for Xception Model...')
@@ -374,7 +192,11 @@ def main():
         evaluate_model(model, test_Xception, test_targets, dog_names)
 
         print('-------------------------------------------------')
-        print('Model build, trained & evaluated')
+        print('Saving the model...')
+        model.save('saved_models/Xception_best.keras')
+
+        print('-------------------------------------------------')
+        print('Model build, trained, evaluated & saved')
 
     else:
         print('Please provide the filepath of the disaster messages database '\
