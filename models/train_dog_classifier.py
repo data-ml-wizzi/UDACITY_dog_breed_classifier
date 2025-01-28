@@ -76,15 +76,15 @@ def get_targets(data_path):
 
 def extract_Xception(tensor):
 	"""
-    Function to to detect dogs in a picture
+    Function to extract the Xcpetion bottleneck features
     
     Parameter:
-        img_path: text string to the relevant picture to be checked
+        tensor: a tensor
     
     Return:
-        prediction: True (a dog) / False (no dog)
+        the bottleneck features
     """
-    
+
 	return Xception(weights='imagenet', include_top=False).predict(xc_ppi(tensor))
 
 
