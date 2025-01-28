@@ -12,11 +12,15 @@ This project ist part of my "Data Science" Nanodegree on Udacity and my final su
 
 
 # Project Motivation <a name="motivation"></a>
-As part of the "Data Science" Nanodegree on Udacity we shall show our skills with creating an ETL Pipeline, attach an ML Pipeline, make the tool usable via an flask frontend and also make it available on GitHub.
+As part of the "Data Science" Nanodegree on Udacity we shall show our skills with creating an Convolutional Neural Network (CNN) Pipeline to classify dog breed and identify humand-dog resemblance. For the user a front end shall be supplied to upload the picture and then retrieve the breed of the dog (or the resemblance of the human). If neither a human or a dog is uploaded this shall be recognized and stated.
 
-During a Disaster usually time and human ressources are a critical ressource. So a keyword search on thousands of messages to filter out the right ones is not practical. Therefore the goal of this specific project ist to optimize the process of message processing and forwarding, so the right information gets to the right recipient fast in order to activate the right countermeassures.
-
-To achieve this first NLP (Natural Language Processing) has to be used to preprocess the text data in order to train a machine learning algorithm for classifying the messages.
+To achieve this I was guided towards the topic by working trough a Jupyter Notebook. There I did
+1. loading the data and some basic data exploration and visualizations as well as data preparations (resizing and normalising) for the CNN models
+2. build a human face detector
+3. build a dog detector based on a pretrained ResNet50 Network
+4. build an own CNN
+5. build an CNN with transfer learnin using the VGG16 CNN
+6. build an own
 
 # Installations <a name="installations"></a>
 
@@ -51,19 +55,26 @@ app
  |--- utils.py                          <- helper functions
 
 bottleneck_features
- |--- None                              <- here the downloaded file part 4 of the instructions is saved
+ |--- None                              <- download file to from instructions part 4
 
- data
- |--- categories.csv                    <- 36 categories for the ~26k messages
- |--- messages.csv                      <- ~26k messages
- |--- DisasterResponse.db               <- SQL Database for storing the cleaned data
- |--- process_data.py                   <- script to process the data
+dog_images
+ |--- None                              <- download files to from instructions part 2
 
- jupyter                                <- Juypter Notebooks with the ETL and ML Pipelines
+haarcascades
+ |--- haarcascade_frontalface_alt.xml   <- pretrained face detection 
 
- models
- |--- classifier.pkl                    <- saved model
- |--- train_classifier.py               <- script to train the classifier model
+lfw
+ |--- None                              <- download files to from instructions part 3
+
+models
+ |--- train_dog_classifier.py           <- file to transfer learn a pretrained Xception CNN
+
+saved_models
+ |--- weights.best.from_scratch.h5      <- saved weights from notebook part 3
+ |--- weights.best.VGG16.h5             <- saved weights from notebook part 4
+ |--- weights.best.Xception.h5          <- saved weights from notebook part 5 
+ |                                         OR train_dog_classifier.py
+ |--- Xception_best.keras               <- best trained Xception model from train_dog_classifier.py
  ```
 
 # Instructions <a name="instructions"></a>
