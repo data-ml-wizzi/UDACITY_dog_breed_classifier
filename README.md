@@ -49,13 +49,12 @@ Furthermore a Flask App was build as an Front End for the Users. Here they can U
 </ul>
 
 # Data <a name="data"></a>
-The Data was provided bith Appen (former Figure8). Their datasets include roughly 26k messages of disasters all around the world as well as their categorization. </br>
-
-The following two CSV files are provided:</br>
+The Data for the dogs contains a training, validation and testing set. In total 8351 images. </br>
 
 <ul>
-  <li>messages.csv: ~ 26k messages
-  <li>categories.csv: 36 disaster categories 
+  <li>training:     6680 images
+  <li>validation:   835 images
+  <li>testing:      836 images  
 </ul>
 
 # File Descriptions <a name="files"></a>
