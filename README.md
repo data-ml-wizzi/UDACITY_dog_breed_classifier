@@ -46,8 +46,12 @@ The following two CSV files are provided:</br>
 ```
 app
  |--- templates
- |       |---master.html                <- Main page of the web app
+ |       |---index.html                 <- Main page of the web app
  |--- run.py                            <- flask file that runs the app
+ |--- utils.py                          <- helper functions
+
+bottleneck_features
+ |--- None                              <- here the downloaded file part 4 of the instructions is saved
 
  data
  |--- categories.csv                    <- 36 categories for the ~26k messages
@@ -70,7 +74,7 @@ app
 
 3. Download the [human dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/lfw`.  If you are using a Windows machine, you are encouraged to use [7zip](http://www.7-zip.org/) to extract the folder. 
 
-4. Donwload the XXXX [VGG-16 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogVGG16Data.npz) XXXX for the dog dataset.  Place it in the repo, at location `path/to/dog-project/bottleneck_features`.
+4. Donwload the [Xception bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogXceptionData.npz) for the dog dataset.  Place it in the repo, at location `path/to/dog-project/bottleneck_features`.
 
 5. Run the following commands in the project's root directory to set up your model.
 
@@ -78,7 +82,9 @@ app
         
         `python models/train_dog_classifier.py`
 
-6. Run your web app: `python app/run.py`
+6. Change to the app directory: `cd app`
+
+7. Run your web app: `python run.py`
 
 7. Click the `PREVIEW` button in the Terminal to open the homepage via http://loclhost:3000 or http://127.0.0.1:3000
 
