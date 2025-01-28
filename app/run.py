@@ -28,9 +28,6 @@ from keras.applications.xception import Xception, preprocess_input
 from PIL import Image
 
 
-
-
-
 # Init of Flask App
 app = Flask(__name__)
 
@@ -51,8 +48,6 @@ face_cascade = cv2.CascadeClassifier('../haarcascades/haarcascade_frontalface_al
 
 # pretrained ResNet50 model for dog detector
 ResNet50_model = RN50(weights='imagenet')
-
-
 
 
 # Define a context manager to suppress stdout and stderr for a cleaner output
@@ -165,6 +160,16 @@ def dog_detector(img_path, model):
 
 
 def classify_dog_breed(img_path, model):
+    """
+    Function to classify the breed of an image
+    
+    Parameter:
+        img_path: text string to the relevant picture to be checked
+        model: model used to make the prediction
+    
+    Return:
+        breed: the predicted breed contained in the image
+    """
     # extract bottleneck features
     print(img_path)
     bottleneck_feature = extract_Xception(path_to_tensor(img_path))
