@@ -14,13 +14,18 @@ This project ist part of my "Data Science" Nanodegree on Udacity and my final su
 # Project Motivation <a name="motivation"></a>
 As part of the "Data Science" Nanodegree on Udacity we shall show our skills with creating an Convolutional Neural Network (CNN) Pipeline to classify dog breed and identify humand-dog resemblance. For the user a front end shall be supplied to upload the picture and then retrieve the breed of the dog (or the resemblance of the human). If neither a human or a dog is uploaded this shall be recognized and stated.
 
-To achieve this I was guided towards the topic by working trough a Jupyter Notebook. There I did
-1. loading the data and some basic data exploration and visualizations as well as data preparations (resizing and normalising) for the CNN models
-2. build a human face detector
+To achieve this I was guided towards the topic by working trough a Jupyter Notebook. There I did...
+
+1. load the data and some basic data exploration and visualizations as well as data preparations (resizing and normalising) for the CNN models
+2. build a human face detector using OpenCV's pre-trained Haar cascades
 3. build a dog detector based on a pretrained ResNet50 Network
 4. build an own CNN
-5. build an CNN with transfer learnin using the VGG16 CNN
-6. build an own
+5. build an CNN with transfer learning using the VGG16 CNN with its respective bootleneck features
+6. build an CNN with transfer learning using the Xception CNN with its respective bootleneck features
+
+Then I setup a train_dog_classifier with the learning from 6. which uses Transfer Learning from the Xception CNN cause it performed the best according to the metrics accuracy, precision and F1-score. Here the last Layer is defined by myself, this last layers then fitted to the training data and the retrieved model stored.
+
+Furthermore a Flask App was build as an Front End for the Users. Here they can Upload a picture and then according to the requested logic it is determined it the picture contains a human, dog or neither. The uploaded image is displayed and in case of an detected dog or human its breed is classified.
 
 # Installations <a name="installations"></a>
 
