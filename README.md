@@ -74,9 +74,9 @@ app
 
 5. Run the following commands in the project's root directory to set up your model.
 
-    - To run ML pipeline that trains classifier and saves</br>
+    - To run ML pipeline that trains the classifier and saves its best version </br>
         
-        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
+        `python models/train_dog_classifier.py`
 
 6. Run your web app: `python app/run.py`
 
