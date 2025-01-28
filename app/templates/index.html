@@ -3,18 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload an Image</title>
+    <title>Doggo - Your Dog Breed Classifier</title>
+    <!-- Bootstrap CSS-Link von einem CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Hundebild hochladen</h1>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*">
-        <input type="submit" value="Upload">
-    </form>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Doggo - Your Dog Breed Classifier</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Formular zum Hochladen eines Bildes -->
+                <form method="post" enctype="multipart/form-data" class="border p-4 bg-light">
+                    <div class="form-group">
+                        <input type="file" name="file"
+                               accept="image/*" class="form-control-file" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Get your Breed</button>
+                </form>
+            </div>
+        </div>
 
-    {% if breed %}
-        <h2>Ergebnis der Klassifizierung:</h2>
-        <p>Die erkannte Hunderasse ist: {{ breed }}</p>
-    {% endif %}
+        <!-- Zeige die erkannte Hunderasse und das hochgeladene Bild an -->
+        {% if breed %}
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 text-center">
+                <h3>Uploaded Image:</h3>
+                <img src="{{ img_url }}" alt="Uploaded Image" class="img-fluid">
+            </div>
+        </div>
+        {% endif %}
+
+        {% if type %}
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        {% if type == "human" %}
+                            <h4 class="card-title">Hello Human</h4>
+                            <p class="card-text">YOU look like a <strong>{{ breed }}</strong></p>
+                        {% elif type == "dog" %}
+                            <h4 class="card-title">Hello Dog</h4>
+                            <p class="card-text">You belong to the breed <strong>{{ breed }}</strong></p>
+                        {% elif type == "neither" %}
+                            <h4 class="card-title">No Human or Dog Detected</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS und Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

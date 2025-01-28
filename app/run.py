@@ -35,16 +35,19 @@ from PIL import Image
 app = Flask(__name__)
 
 # Configuration
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static/uploads/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+if not os.path.exists(UPLOAD_FOLDER):
+   os.makedirs(UPLOAD_FOLDER)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Load the trained breed classification model
-model = load_model('saved_models/Xception_best.keras')
+model = load_model('../saved_models/Xception_best.keras')
 
 # retrieve the pre-trained face detector
-face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_alt.xml')
+face_cascade = cv2.CascadeClassifier('../haarcascades/haarcascade_frontalface_alt.xml')
 
 # pretrained ResNet50 model for dog detector
 ResNet50_model = RN50(weights='imagenet')
@@ -163,6 +166,7 @@ def dog_detector(img_path, model):
 
 def classify_dog_breed(img_path, model):
     # extract bottleneck features
+    print(img_path)
     bottleneck_feature = extract_Xception(path_to_tensor(img_path))
     # obtain predicted vector
     predicted_vector = model.predict(bottleneck_feature)
@@ -175,6 +179,12 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    """
+    Handles the main web page and prediction logic for uploaded images.
+
+    Returns:
+        flask.Response: Renders the HTML page with prediction results or an upload form.
+    """
     if request.method == 'POST':
         # Prüfe, ob die Post-Anfrage eine Datei enthält
         if 'file' not in request.files:
@@ -184,11 +194,11 @@ def upload_file():
         if file.filename == '':
             return redirect(request.url)
         
-        if file and allowed_file(file.filename):
+        if file: # and allowed_file(file.filename):
             
             # save the uploaded file
-            filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            #filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(file_path)
 
             # predict the breed
@@ -203,6 +213,9 @@ def upload_file():
                 picture_type = 'neither'
                 print("ERROR: neither a human nor a dog were recognized")                            
 
+            print(breed)
+            print(picture_type)
+            print(file_path)
             # return the attained reults to the index.html
             return render_template('index.html', 
                                    breed=breed, 
@@ -214,5 +227,5 @@ def upload_file():
 
 
 if __name__ == '__main__':
-    dog_names = get_dog_names('dogImages/train')
+    dog_names = get_dog_names('../dogImages/train')
     app.run(debug=True)
