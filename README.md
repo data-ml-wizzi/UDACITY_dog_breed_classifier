@@ -115,18 +115,24 @@ saved_models
 
 
 # Results <a name="results"></a>
-In the web app (Figure 1) the user can enter messages at the top, which are then classified based on the stored model. Below, various statistical evaluations of the training data are also shown:
-
-- Distribution of all messages according to genres ('news', 'direct', 'social') that where used for the training of the model
-- Distribution of all messages according to the 36 categories that where used for the training of the model
-- Distribution of the top five categories for all messages that where used for the training of the model
+In the web app (Figure 1) the user can upload an image. 
 
 <br>
     <div align="center">
-	    <img src="https://github.com/data-ml-wizzi/UDACITY_disaster_response_pipeline/blob/main/app/app_screeni.png">
+	    <img src="https://github.com/data-ml-wizzi/UDACITY_dog_breed_classifier/blob/main/images/flask_app_landing.png">
     </div>
     <div align="center">
-	    <i>Figure 1 – Screenshot of the Web-App</i>
+	    <i>Figure 1 – Screenshot of the Web-App Landing Page</i>
     </div>
 <br>
 
+Once the user hits "Get your Breed" the image is uploaded, the breed is classified and a human-face and dog detection runs on the image. The Image is displayed at all times. If a dog or human are recognized the (resembling) breed the dog/human are welcomed and they are told their breed.  
+
+<br>
+    <div align="center">
+	    <img src="https://github.com/data-ml-wizzi/UDACITY_dog_breed_classifier/blob/main/images/flask_app_result.png">
+    </div>
+    <div align="center">
+	    <i>Figure 2 – Screenshot of the Web-App after an image has been uploaded</i>
+    </div>
+<br>
