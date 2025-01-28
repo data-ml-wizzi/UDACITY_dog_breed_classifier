@@ -1,7 +1,6 @@
 #import basics
 import os
 import sys
-import pandas as pd
 import numpy as np
 from tqdm import tqdm
 import contextlib
@@ -9,13 +8,6 @@ import contextlib
 #import data loading stuff
 from sklearn.datasets import load_files
 from glob import glob
-import random  
-
-# face & dog recognition stuff
-import cv2
-from keras.applications.resnet50 import ResNet50 as RN50
-from keras.preprocessing import image    
-from keras.applications.resnet50 import preprocess_input as rn_ppi
 
 
 #import tensorflow stuff
@@ -24,7 +16,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from keras.models import Sequential
 from tensorflow.keras.layers import GlobalAveragePooling2D
 from keras.layers import Dense
-from keras.applications.xception import Xception, preprocess_input
+from keras.applications.xception import Xception
 from keras.applications.xception import preprocess_input as xc_ppi
 
 #import evaluation
@@ -92,6 +84,7 @@ def extract_Xception(tensor):
     Return:
         prediction: True (a dog) / False (no dog)
     """
+    
 	return Xception(weights='imagenet', include_top=False).predict(xc_ppi(tensor))
 
 
@@ -118,7 +111,6 @@ def build_model(shape):
     Xception_model.compile(loss='categorical_crossentropy',
                            optimizer='rmsprop',
                            metrics=['accuracy'])
-    
     
     return Xception_model
 
@@ -154,14 +146,12 @@ def evaluate_model(model, X_test, Y_test, names):
 
 
 def main():
-    # Set log level
-    
 
     if len(sys.argv) == 1:
                
         # load train, test, and validation datasets
         print('-------------------------------------------------')
-        print('Loading dog names...')
+        print('Loading dog names and targets...')
         dog_names = get_dog_names('dogImages/train')
         train_targets = get_targets('dogImages/train')
         valid_targets = get_targets('dogImages/valid')
