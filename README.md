@@ -30,14 +30,22 @@ Furthermore a Flask App was build as an Front End for the Users. Here they can U
 # Installations <a name="installations"></a>
 
 <ul>
-    <li>pandas          == 2.2.3
-    <li>numpy           == 2.2.2
+    <li>Flask           == 3.1.0
+    <li>h5py            == 3.12.1
     <li>ipykernel       == 6.29.5
-    <li>sqlalchemy      == 2.0.37
-    <li>nltk            == 3.9.1
-    <li>scikit-learn    == 1.6.1
-    <li>plotly          == 5.24.1
-    <li>flask           == 3.1.0
+    <li>ipython         == 8.31.0
+    <li>keras           == 3.8.0
+    <li>matplotlib      == 3.10.0
+    <li>numpy           == 2.0.2
+    <li>opencv-python   == 4.11.0.86
+    <li>pandas          == 2.2.3
+    <li>pillow          == 11.1.0
+    <li>requests        == 2.32.3
+    <li>scikit-lear     == 1.6.1
+    <li>scipy           == 1.15.1
+    <li>seaborn         == 0.13.2
+    <li>tensorflow      == 2.18.0
+    <li>tqdm            == 4.67.1
 </ul>
 
 # Data <a name="data"></a>
