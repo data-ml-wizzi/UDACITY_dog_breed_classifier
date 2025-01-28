@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload an Image</title>
+</head>
+<body>
+    <h1>Hundebild hochladen</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*">
+        <input type="submit" value="Upload">
+    </form>
+
+    {% if breed %}
+        <h2>Ergebnis der Klassifizierung:</h2>
+        <p>Die erkannte Hunderasse ist: {{ breed }}</p>
+    {% endif %}
+</body>
+</html>
