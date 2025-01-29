@@ -29,6 +29,8 @@ Furthermore a Flask App was build as an Front End for the Users. Here they can U
 
 # Installations <a name="installations"></a>
 
+Python 3.12 was used. Herefore the following Packages have to be installed.
+
 <ul>
     <li>Flask           == 3.1.0
     <li>h5py            == 3.12.1
