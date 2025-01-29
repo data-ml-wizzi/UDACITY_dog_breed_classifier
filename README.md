@@ -61,12 +61,25 @@ The datasets contain a total of 133 breeds of dogs. The images are not spread ev
 
 <br>
     <div align="center">
-	    <img src="https://github.com/data-ml-wizzi/UDACITY_dog_breed_classifier/blob/main/images/breed_distribution.png">
+	    <img src="https://github.com/data-ml-wizzi/UDACITY_dog_breed_classifier/blob/main/images/breed_distribution_datasets.png">
     </div>
     <div align="center">
 	    <i>Figure 3 – Distribution of the images in the dataset over the breeds</i>
     </div>
 <br>
+
+Furthermore the image sizes vary quite a bit but at least the variation is evenly distributed over the different data sets, altough not obvious on first sight.
+
+
+<br>
+    <div align="center">
+	    <img src="https://github.com/data-ml-wizzi/UDACITY_dog_breed_classifier/blob/main/images/image_dim_stats.png">
+    </div>
+    <div align="center">
+	    <i>Figure 3 – Distribution of the images sizes in the datasets</i>
+    </div>
+<br>
+
 
 # File Descriptions <a name="files"></a>
 
