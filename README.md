@@ -3,7 +3,7 @@ This project ist part of my "Data Science" Nanodegree on Udacity and my final su
 
 # Table of Contents
 
-1. [Project Motivation](#motivation)
+1. [Project Overview & Motivation](#motivation)
 2. [Installations](#installations)
 2. [Data](#data)
 3. [File Descriptions](#files)
@@ -11,7 +11,7 @@ This project ist part of my "Data Science" Nanodegree on Udacity and my final su
 5. [Results](#results)
 
 
-# Project Motivation <a name="motivation"></a>
+# Project Overview and Motivation <a name="motivation"></a>
 As part of the "Data Science" Nanodegree on Udacity we shall show our skills with creating an Convolutional Neural Network (CNN) Pipeline to classify dog breed and identify humand-dog resemblance. For the user a front end shall be supplied to upload the picture and then retrieve the breed of the dog (or the resemblance of the human). If neither a human or a dog is uploaded this shall be recognized and stated.
 
 To achieve this I was guided towards the topic by working trough a Jupyter Notebook. There I did...
