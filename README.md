@@ -173,4 +173,4 @@ I hereby want to thank ...
 - A team of researchers at Microsofot for developing the ResNet models
 - The Visual Geometry Group (VGG) at the University of Oxford for the creating of the VGG models used in the notebook
 - The Porsche HR department and my boss making it possible for me to take this course and get the free time for it
-- last not but least my reviewer for beeing patient with my submissions. Thanks for your feedback and time!
+- last but not least my reviewer for beeing patient with my submissions. Thanks for your feedback and time!
