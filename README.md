@@ -9,6 +9,7 @@ This project ist part of my "Data Science" Nanodegree on Udacity and my final su
 3. [File Descriptions](#files)
 4. [Instructions](#instructions)
 5. [Results](#results)
+6. [Acknowledgements](#acknowledgements)
 
 
 # Project Overview and Motivation <a name="motivation"></a>
@@ -162,3 +163,14 @@ Once the user hits "Get your Breed" the image is uploaded, the breed is classifi
 	    <i>Figure 2 – Screenshot of the Web-App after an image has been uploaded</i>
     </div>
 <br>
+
+# Acknowledgements <a name="acknowledgements"></a>
+
+I hereby want to thank ...
+
+- Udacity "AI and Data Science" Nanodegree for providing the project framework
+- Francois Chollet for creating the Keras Library and the Xception CNN described in his paper "Xception: Deep Learning with Depthwise Separable Convolutions," published in 2017.
+- A team of researchers at Microsofot for developing the ResNet models
+- The Visual Geometry Group (VGG) at the University of Oxford for the creating of the VGG models used in the notebook
+- The Porsche HR department and my boss making it possible for me to take this course and get the free time for it
+- last not but least my reviewer for beeing patient with my submissions. Thanks for your feedback and time!
